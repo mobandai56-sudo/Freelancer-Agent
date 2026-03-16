@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Freelancing Mentor AI</title>
+</head>
+<body>
+<h2>Freelancing Mentor AI</h2>
+<div id="chat"></div>
+<input id="message" placeholder="Type message">
+<button onclick="send()">Send</button>
+<script>
+async function send(){
+    let msg=document.getElementById("message").value;
+    let res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg})});
+    let data=await res.json();
+    let chat=document.getElementById("chat");
+    chat.innerHTML+="<p><b>You:</b> "+msg+"</p>";
+    chat.innerHTML+="<p><b>AI:</b> "+data.reply+"</p>";
+}
+</script>
+</body>
+</html>
